@@ -32,7 +32,7 @@ class CompanyReviewStatsView(RetrieveAPIView):
 
 class CompanyReviewsListView(APIView):
     def get(self, request, *args, **kwargs):
-        reviews = Review.objects.filter(company_id=self.kwargs["pk"])
+        reviews = Review.objects.filter(company_id=self.kwargs["pk"], is_active=True)
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
 
